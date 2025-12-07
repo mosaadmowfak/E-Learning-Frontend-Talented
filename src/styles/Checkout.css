@@ -1,0 +1,59 @@
+.checkout-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.checkout-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.checkout-price {
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+.checkout-price span {
+  font-weight: 700;
+  color: #6c4cf1;
+}
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.checkout-form label {
+  font-weight: 600;
+}
+
+.checkout-form input,
+.checkout-form select {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.pay-btn {
+  margin-top: 20px;
+  padding: 14px;
+  font-size: 18px;
+  background: #6c4cf1;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pay-btn:hover {
+  background: #5537d3;
+}

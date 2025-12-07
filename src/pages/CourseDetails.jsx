@@ -40,44 +40,26 @@ export default function CourseDetails() {
   }, [id]);
 
   // 🔥 BUY WHOLE COURSE
-  const handleEnroll = async () => {
-    try {
-      const res = await api.post("/Payments/create", {
-        courseId: Number(id),
-        billingEmail: "mosaad@gmail.com",
-        billingName: "Mosaad",
-        billingPhone: "01225858085",
-        method: "card"
-      });
-
-      if (res.data?.paymentUrl) {
-        window.location.href = res.data.paymentUrl;
-      }
-    } catch (err) {
-      console.log(err);
-      alert("Payment failed");
+  const handleEnroll = () => {
+  navigate("/pay", {
+    state: {
+      courseId: Number(id),
+      price: course.price,
     }
-  };
+  });
+};
+
 
   // 🔥 BUY SESSION ONLY
-  const handleBuySession = async (sessionId, price) => {
-    try {
-      const res = await api.post("/Payments/create", {
-        sessionId: Number(sessionId),
-        billingEmail: "mosaad@gmail.com",
-        billingName: "Mosaad",
-        billingPhone: "01225858085",
-        method: "card"
-      });
-
-      if (res.data?.paymentUrl) {
-        window.location.href = res.data.paymentUrl;
-      }
-    } catch (err) {
-      console.log(err);
-      alert("Payment failed");
+  const handleBuySession = (sessionId, price) => {
+  navigate("/pay", {
+    state: {
+      sessionId: Number(sessionId),
+      price: price,
     }
-  };
+  });
+};
+
 
   if (loading) return <h1 className="loading-text">Loading...</h1>;
   if (!course) return <h1 className="loading-text">Course not found</h1>;

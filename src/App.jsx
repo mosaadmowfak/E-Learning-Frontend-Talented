@@ -8,6 +8,7 @@ import CourseDetails from "./pages/CourseDetails";
 import CourseLearn from "./pages/CourseLearn";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentPage from "./pages/Payment";
 
 // Dashboard imports
 import UserDashboardLayout from "./pages/UserDashboardLayout";
@@ -85,6 +86,17 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+
+
+        <Route
+          path="/pay"
+          element={
+            <ProtectedRoute>
+              <PaymentPage />
+            </ProtectedRoute>
+          }
+        />
+
       </Routes>
     </>
   );
