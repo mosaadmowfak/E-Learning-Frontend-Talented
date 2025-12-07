@@ -7,6 +7,15 @@ import Register from "./pages/Register";
 import CourseDetails from "./pages/CourseDetails";
 import CourseLearn from "./pages/CourseLearn";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PaymentSuccess from "./pages/PaymentSuccess";
+// Dashboard imports
+import UserDashboardLayout from "./pages/UserDashboardLayout";
+import DashboardOverview from "./pages/dashboards/DashboardOverview";
+import MyCourses from "./pages/dashboards/MyCourses";
+import MySessions from "./pages/dashboards/MySessions";
+import PaymentHistory from "./pages/dashboards/PaymentHistory";
+
+
 
 
 export default function App() {
@@ -14,50 +23,62 @@ export default function App() {
     <>
       <Navbar />
 
-      <div style={{ padding: 20 }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/courses" element={<Courses />} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
 
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+        {/* Dashboard (Protected) */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <UserDashboardLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<DashboardOverview />} />
+          <Route path="courses" element={<MyCourses />} />
+          <Route path="sessions" element={<MySessions />} />
+          <Route path="payments" element={<PaymentHistory />} />
+        </Route>
 
-          <Route path="/courses" element={<Courses />} />
-          <Route path="/course/:id" element={<CourseDetails />} />
+        {/* Course Details */}
+        <Route
+          path="/course/:id"
+          element={
+            <ProtectedRoute>
+              <CourseDetails />
+            </ProtectedRoute>
+          }
+        />
 
-          {/* صفحة التعليم (الكورس نفسه) */}
-          <Route path="/course/:id/learn" element={<CourseLearn />} />
-          <Route path="/course/:id/learn/:lessonId" element={<CourseLearn />} />
-
-          <Route
-            path="/course/:id"
-            element={
-              <ProtectedRoute>
-                <CourseDetails />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/course/:id/learn"
-            element={
-              <ProtectedRoute>
-                <CourseLearn />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/course/:id/learn/:lessonId"
-            element={
-              <ProtectedRoute>
-                <CourseLearn />
-              </ProtectedRoute>
-            }
-          />
+        {/* Course Learning Pages */}
+        <Route
+          path="/course/:id/learn"
+          element={
+            <ProtectedRoute>
+              <CourseLearn />
+            </ProtectedRoute>
+          }
+        />
 
 
-        </Routes>
-      </div>
+        <Route
+          path="/course/:id/learn/:lessonId"
+          element={
+            <ProtectedRoute>
+              <CourseLearn />
+            </ProtectedRoute>
+          }
+        />
+
+
+
+      </Routes>
     </>
   );
 }

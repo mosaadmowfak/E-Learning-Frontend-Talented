@@ -1,67 +1,86 @@
-import homeImage from "../assets/hero_bg_01.png";
+import { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import api from "../api/axiosInstance";
+import "../styles/Home.css";
 
 export default function Home() {
+  const [courses, setCourses] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  const categoriesRef = useRef(null);
+
+  useEffect(() => {
+    const load = async () => {
+      const res1 = await api.get("/Courses");
+      const res2 = await api.get("/Categories");
+      setCourses(res1.data);
+      setCategories(res2.data);
+    };
+    load();
+  }, []);
+
+  const scrollToCategories = () => {
+    categoriesRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <section
-      style={{
-        minHeight: "calc(100vh - 80px)",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        textAlign: "center",
-        padding: "40px 20px",
-      }}
-    >
-      {/* Hero Image */}
-      <img
-        src={homeImage}
-        alt="hero"
-        style={{
-          width: "260px",
-          maxWidth: "80%",
-          marginBottom: 20,
-          borderRadius: "14px",
-          animation: "fadeIn 0.8s ease-in-out",
-        }}
-      />
+    <div className="home-page">
 
-      {/* Title */}
-      <h1
-        style={{
-          color: "var(--cyan)",
-          fontSize: "38px",
-          maxWidth: "900px",
-        }}
-      >
-        TALENTED E-Learning Academy
-      </h1>
+      {/* HERO */}
+      <div className="hero">
+        <div className="hero-box">
+          <h1>Learn skills that can change your life</h1>
+          <p>Improve yourself and gain new experiences that will help shape your future</p>
 
-      {/* Subtitle */}
-      <p
-        style={{
-          marginTop: 10,
-          opacity: 0.85,
-          fontSize: 18,
-        }}
-      >
-        Learn • Grow • Succeed
-      </p>
+          <div className="hero-buttons">
+            <button className="button-primary" onClick={scrollToCategories}>
+              Show Categories
+            </button>
 
-      <button
-        style={{
-          marginTop: 30,
-          padding: "12px 30px",
-          fontSize: 18,
-          background: "var(--primary)",
-          border: "none",
-          borderRadius: 8,
-          cursor: "pointer",
-        }}
-        onClick={() => (window.location.href = "/courses")}
-      >
-        Browse Courses
-      </button>
-    </section>
+            <Link to="/courses" className="button-secondary">
+              Browse Courses
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* COURSES */}
+      <h2 className="section-title courses-title">Courses</h2>
+
+      <div className="courses-grid">
+        {courses.map(c => (
+          <div className="course-card" key={c.id}>
+            <img src={`http://localhost:5083${c.imageUrl}`} alt="" />
+            <h3>{c.title}</h3>
+            <p className="price">{c.price} EGP</p>
+            <Link className="details-btn" to={`/course/${c.id}`}>Details</Link>
+          </div>
+        ))}
+      </div>
+
+      {/* CATEGORIES */}
+      <h2 className="section-title categories-title">Categories</h2>
+
+      <div className="categories-grid" ref={categoriesRef}>
+        {categories.map(cat => (
+          <div className="category-card" key={cat.id}>{cat.name}</div>
+        ))}
+      </div>
+
+      {/* FOOTER */}
+      <footer className="footer">
+        <div className="footer-content">
+          <span className="footer-brand">TALENTED</span>
+
+          <div className="social-links">
+            <a href="https://facebook.com" target="_blank">Facebook</a>
+            <a href="https://instagram.com" target="_blank">Instagram</a>
+          </div>
+        </div>
+
+        <p className="footer-copy">© {new Date().getFullYear()} TALENTED — جميع الحقوق محفوظة</p>
+      </footer>
+
+    </div>
   );
 }

@@ -1,0 +1,33 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* GLOBAL THEME */
+:root {
+  --primary: #6c5ce7;
+  --dark: #1c1d1f;
+  --light: #ffffff;
+  --radius: 8px;
+
+  --font-main: 'Cairo', sans-serif;
+  --font-title: 'Cairo', sans-serif;
+}
+
+/* BODY */
+body {
+  font-family: var(--font-main);
+  background: #fff;
+  color: #000;
+  overflow-x: hidden;
+}
+
+/* REMOVE VITE DEFAULT ROOT RESTRICTIONS */
+#root {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}

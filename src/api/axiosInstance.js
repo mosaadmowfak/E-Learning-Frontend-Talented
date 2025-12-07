@@ -1,11 +1,9 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
+  baseURL: "http://192.168.1.5:5083/api",
 });
+
 
 // لو فيه JWT token مخزّن، ضيفه في كل request
 api.interceptors.request.use((config) => {

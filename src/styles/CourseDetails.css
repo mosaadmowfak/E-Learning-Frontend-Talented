@@ -1,0 +1,184 @@
+.course-details-page {
+  padding-bottom: 60px;
+  color: #111;
+  background: #fff;
+}
+
+/* TOP AREA */
+.course-top {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 28px;
+  align-items: start;
+  padding: 28px 60px;
+  border-bottom: 1px solid #eee;
+}
+
+/* COVER */
+.course-cover {
+  background: #fafafa;
+  padding: 12px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.course-cover img {
+  max-width: 100%;
+  max-height: 260px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* INFO */
+.course-title {
+  font-size: 34px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+
+.meta-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.chip {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.category-chip {
+  background: var(--primary);
+  color: #fff;
+}
+
+.course-desc {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 18px;
+}
+
+.course-price {
+  margin-top: 15px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.enroll-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* SESSIONS */
+.content-title {
+  padding: 30px 60px 10px;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.sessions-list {
+  padding: 0 60px 60px;
+}
+
+/* CARD */
+.session-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-radius: 10px;
+  background: #ffffff;
+  margin-bottom: 14px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+}
+
+.session-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+/* LEFT */
+.session-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.session-title {
+  margin: 0;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.session-price {
+  margin-top: 4px;
+  color: #6c5ce7;
+  font-weight: 600;
+}
+/* RIGHT BUTTONS */
+.watch-btn,
+.buy-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  min-width: 130px;
+  text-align: center;
+}
+
+/* WATCH */
+.watch-btn {
+  background: #00b894;
+  color: white;
+}
+
+.watch-btn:hover {
+  background: #009f7d;
+}
+
+/* BUY */
+.buy-btn {
+  background: #6c5ce7;
+  color: white;
+}
+.buy-btn:hover {
+  background: #5a4bd6;
+}
+
+/* MOBILE */
+@media (max-width: 880px) {
+  .course-top {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .content-title,
+  .sessions-list {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .session-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .session-right {
+    width: 100%;
+  }
+}
