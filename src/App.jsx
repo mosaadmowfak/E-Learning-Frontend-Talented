@@ -8,6 +8,7 @@ import CourseDetails from "./pages/CourseDetails";
 import CourseLearn from "./pages/CourseLearn";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PaymentSuccess from "./pages/PaymentSuccess";
+
 // Dashboard imports
 import UserDashboardLayout from "./pages/UserDashboardLayout";
 import DashboardOverview from "./pages/dashboards/DashboardOverview";
@@ -15,8 +16,8 @@ import MyCourses from "./pages/dashboards/MyCourses";
 import MySessions from "./pages/dashboards/MySessions";
 import PaymentHistory from "./pages/dashboards/PaymentHistory";
 
-
-
+// ⭐ ADMIN PAGE (هنربطه بعدين)
+import AdminDashboard from "./pages/admin/AdminDashboard";
 
 export default function App() {
   return (
@@ -31,7 +32,7 @@ export default function App() {
         <Route path="/courses" element={<Courses />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
 
-        {/* Dashboard (Protected) */}
+        {/* USER Dashboard */}
         <Route
           path="/dashboard"
           element={
@@ -45,6 +46,16 @@ export default function App() {
           <Route path="sessions" element={<MySessions />} />
           <Route path="payments" element={<PaymentHistory />} />
         </Route>
+
+        {/* ADMIN Dashboard */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute adminOnly={true}>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
 
         {/* Course Details */}
         <Route
@@ -66,7 +77,6 @@ export default function App() {
           }
         />
 
-
         <Route
           path="/course/:id/learn/:lessonId"
           element={
@@ -75,9 +85,6 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
-
-
       </Routes>
     </>
   );

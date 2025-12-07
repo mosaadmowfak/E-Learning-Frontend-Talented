@@ -1,16 +1,15 @@
+// src/api/axiosInstance.js
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://192.168.1.5:5083/api",
+  baseURL: "http://localhost:5083/api",
 });
 
-
-// لو فيه JWT token مخزّن، ضيفه في كل request
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  // DEBUG
+  // console.log("TOKEN SENT:", token);
   return config;
 });
 

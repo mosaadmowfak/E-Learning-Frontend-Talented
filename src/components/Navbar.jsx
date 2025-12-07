@@ -4,7 +4,7 @@ import { useState } from "react";
 import "../styles/Navbar.css";
 
 export default function Navbar() {
-  const { token, logout } = useAuth();
+  const { token, logout, user } = useAuth();
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
@@ -18,13 +18,10 @@ export default function Navbar() {
   return (
     <>
       <nav className="navbar">
-
-        {/* Logo */}
         <div className="nav-left">
           <span className="logo-text">TALENTED</span>
         </div>
 
-        {/* Search */}
         <form onSubmit={handleSearch} className="nav-search">
           <input
             value={search}
@@ -33,16 +30,18 @@ export default function Navbar() {
           />
         </form>
 
-        {/* Desktop Links */}
         <div className="nav-links">
           <Link to="/">Home</Link>
           <Link to="/courses">Courses</Link>
 
-          {/* 👇 زرار PROFILE / DASHBOARD */}
-          {token && (
-            <Link to="/dashboard" className="profile-link">
-              Profile
-            </Link>
+          {/* USER PROFILE */}
+          {token && user?.role === "student" && (
+            <Link to="/dashboard" className="profile-link">Profile</Link>
+          )}
+
+          {/* ADMIN PANEL */}
+          {token && user?.role === "admin" && (
+            <Link to="/admin" className="profile-link">Admin Panel</Link>
           )}
 
           {!token ? (
@@ -55,24 +54,25 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Mobile Menu Button */}
         <button className="mobile-menu-btn" onClick={() => setOpen(true)}>
           ☰
         </button>
       </nav>
 
-      {/* Mobile Menu */}
       <div className={`mobile-menu ${open ? "open" : ""}`}>
         <button className="close-btn" onClick={() => setOpen(false)}>✕</button>
 
         <Link to="/" onClick={() => setOpen(false)}>Home</Link>
         <Link to="/courses" onClick={() => setOpen(false)}>Courses</Link>
 
-        {/* 👇 Dashboard في الموبايل */}
-        {token && (
-          <Link to="/dashboard" onClick={() => setOpen(false)}>
-            Profile
-          </Link>
+        {/* Mobile student profile */}
+        {token && user?.role === "student" && (
+          <Link to="/dashboard" onClick={() => setOpen(false)}>Profile</Link>
+        )}
+
+        {/* Mobile admin panel */}
+        {token && user?.role === "admin" && (
+          <Link to="/admin" onClick={() => setOpen(false)}>Admin Panel</Link>
         )}
 
         {!token ? (
