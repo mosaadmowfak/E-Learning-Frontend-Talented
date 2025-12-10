@@ -1,4 +1,4 @@
-import "../styles/policies.css";
+import "../styles/Policies.css";
 
 export default function RefundPolicy() {
   return (
