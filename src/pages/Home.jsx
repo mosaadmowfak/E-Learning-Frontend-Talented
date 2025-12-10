@@ -9,11 +9,6 @@ export default function Home() {
 
   const categoriesRef = useRef(null);
 
-  // دالة إصلاح رابط الصورة
-  const fixImage = (url) => {
-    if (!url) return "/placeholder.png";
-    return `https://talented-academy.space${url.replace("/uploads", "/Uploads")}`;
-  };
 
   useEffect(() => {
     const load = async () => {
@@ -56,10 +51,11 @@ export default function Home() {
         {courses.map((c) => (
           <div className="course-card" key={c.id}>
             <img
-              src={fixImage(c.imageUrl)}
+              src={c.imageUrl ? `https://talented-academy.space${c.imageUrl}` : "/placeholder.png"}
               alt={c.title}
               className="thumb"
             />
+
 
             <h3>{c.title}</h3>
             <p className="price">{c.price} EGP</p>

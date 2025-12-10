@@ -10,12 +10,6 @@ export default function Courses() {
 
   const API = import.meta.env.VITE_API_URL.replace("/api", "");
 
-  // دالة إصلاح الصورة
-  const fixImage = (url) => {
-    if (!url) return "/placeholder.png";
-    return `https://talented-academy.space${url.replace("/uploads", "/Uploads")}`;
-  };
-
   const queryParams = new URLSearchParams(location.search);
   const search = queryParams.get("search")?.toLowerCase() || "";
 
@@ -38,10 +32,11 @@ export default function Courses() {
           <div className="course-card" key={c.id}>
 
             <img
-              src={`${fixImage(c.imageUrl)}?v=${Date.now()}`}
+              src={`https://talented-academy.space${c.imageUrl}?v=${Date.now()}`}
               alt={c.title}
               className="course-img"
             />
+
 
             <div className="course-info">
               <h3 className="course-name">{c.title}</h3>
