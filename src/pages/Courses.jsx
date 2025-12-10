@@ -8,6 +8,8 @@ export default function Courses() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const API = import.meta.env.VITE_API_URL.replace("/api", "");
+
   const queryParams = new URLSearchParams(location.search);
   const search = queryParams.get("search")?.toLowerCase() || "";
 
@@ -23,7 +25,6 @@ export default function Courses() {
 
   return (
     <div className="courses-wrapper">
-
       <h1 className="courses-title">Courses</h1>
 
       <div className="courses-grid">
@@ -31,7 +32,7 @@ export default function Courses() {
           <div className="course-card" key={c.id}>
 
             <img
-              src={`http://localhost:5083${c.imageUrl}`}
+              src={`${API}${c.imageUrl}`}
               alt={c.title}
               className="course-img"
             />
@@ -40,7 +41,6 @@ export default function Courses() {
               <h3 className="course-name">{c.title}</h3>
               <p className="course-price">{c.price} EGP</p>
 
-              {/* ← هنا نغير اسم الكلاس */}
               <button
                 className="details-btn"
                 onClick={() => navigate(`/course/${c.id}`)}

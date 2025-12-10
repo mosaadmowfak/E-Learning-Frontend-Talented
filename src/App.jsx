@@ -9,6 +9,8 @@ import CourseLearn from "./pages/CourseLearn";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentPage from "./pages/Payment";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import RefundPolicy from "./pages/RefundPolicy";
 
 // Dashboard imports
 import UserDashboardLayout from "./pages/UserDashboardLayout";
@@ -32,6 +34,10 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
+
+
 
         {/* USER Dashboard */}
         <Route

@@ -17,6 +17,9 @@ export default function CourseDetails() {
   const [fullAccess, setFullAccess] = useState(false);
   const [unlockedSessions, setUnlockedSessions] = useState([]);
 
+  // ❗ API بدون /api للصور
+  const API_BASE = import.meta.env.VITE_API_URL.replace("/api", "");
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -41,25 +44,23 @@ export default function CourseDetails() {
 
   // 🔥 BUY WHOLE COURSE
   const handleEnroll = () => {
-  navigate("/pay", {
-    state: {
-      courseId: Number(id),
-      price: course.price,
-    }
-  });
-};
-
+    navigate("/pay", {
+      state: {
+        courseId: Number(id),
+        price: course.price,
+      },
+    });
+  };
 
   // 🔥 BUY SESSION ONLY
   const handleBuySession = (sessionId, price) => {
-  navigate("/pay", {
-    state: {
-      sessionId: Number(sessionId),
-      price: price,
-    }
-  });
-};
-
+    navigate("/pay", {
+      state: {
+        sessionId: Number(sessionId),
+        price: price,
+      },
+    });
+  };
 
   if (loading) return <h1 className="loading-text">Loading...</h1>;
   if (!course) return <h1 className="loading-text">Course not found</h1>;
@@ -73,7 +74,7 @@ export default function CourseDetails() {
       <div className="course-top">
         <div className="course-cover">
           <img
-            src={`http://localhost:5083${course.imageUrl}`}
+            src={`${API_BASE}${course.imageUrl}`}
             alt="cover"
             loading="lazy"
           />

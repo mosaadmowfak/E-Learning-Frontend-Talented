@@ -1,4 +1,3 @@
-// src/pages/admin/AdminDashboard.jsx
 import React, { useEffect, useState } from "react";
 import {
   getAdminDashboard,
@@ -21,10 +20,13 @@ export default function AdminDashboard() {
   const [courses, setCourses] = useState([]);
   const [sessions, setSessions] = useState([]);
 
-  // UI states
+  // 🔥 API الصحيح للصور
+  const API = import.meta.env.VITE_API_URL.replace("/api", "");
+
+  // UI
   const [loading, setLoading] = useState(true);
-  const [courseForm, setCourseForm] = useState(null); // null | {id?, title, description, price, categoryId}
-  const [sessionForm, setSessionForm] = useState(null); // null | {id?, title, videoUrl, price, courseId}
+  const [courseForm, setCourseForm] = useState(null);
+  const [sessionForm, setSessionForm] = useState(null);
   const [imageFile, setImageFile] = useState(null);
 
   useEffect(() => {
@@ -40,6 +42,7 @@ export default function AdminDashboard() {
         getCourses(),
         getSessions(),
       ]);
+
       setProfile(pRes.data);
       setSummary(dRes.data);
       setCourses(cRes.data || []);
@@ -52,11 +55,18 @@ export default function AdminDashboard() {
     }
   }
 
-  // ---- Courses CRUD ----
+  // COURSE CRUD
   const openNewCourse = () =>
     setCourseForm({ title: "", description: "", price: 0, categoryId: 0 });
+
   const openEditCourse = (c) =>
-    setCourseForm({ id: c.id, title: c.title, description: c.description || "", price: c.price, categoryId: c.categoryId || 0 });
+    setCourseForm({
+      id: c.id,
+      title: c.title,
+      description: c.description || "",
+      price: c.price,
+      categoryId: c.categoryId || 0,
+    });
 
   const saveCourse = async () => {
     try {
@@ -77,16 +87,18 @@ export default function AdminDashboard() {
         });
         alert("Course created");
       }
+
       setCourseForm(null);
       await loadAll();
     } catch (err) {
       console.error(err);
-      alert("حدث خطأ أثناء حفظ الكورس");
+      alert("خطأ أثناء حفظ الكورس");
     }
   };
 
   const removeCourse = async (id) => {
     if (!window.confirm("متأكد تحذف الكورس؟")) return;
+
     try {
       await deleteCourse(id);
       await loadAll();
@@ -97,7 +109,8 @@ export default function AdminDashboard() {
   };
 
   const uploadImage = async (courseId) => {
-    if (!imageFile) return alert("اختار صورة أولاً");
+    if (!imageFile) return alert("اختار صورة الأول");
+
     try {
       await uploadCourseImage(courseId, imageFile);
       alert("Image uploaded");
@@ -109,11 +122,18 @@ export default function AdminDashboard() {
     }
   };
 
-  // ---- Sessions CRUD ----
+  // SESSION CRUD
   const openNewSession = () =>
     setSessionForm({ title: "", videoUrl: "", price: 0, courseId: 0 });
+
   const openEditSession = (s) =>
-    setSessionForm({ id: s.id, title: s.title, videoUrl: s.videoUrl || "", price: s.price, courseId: s.courseId });
+    setSessionForm({
+      id: s.id,
+      title: s.title,
+      videoUrl: s.videoUrl || "",
+      price: s.price,
+      courseId: s.courseId,
+    });
 
   const saveSession = async () => {
     try {
@@ -133,6 +153,7 @@ export default function AdminDashboard() {
         });
         alert("Session created");
       }
+
       setSessionForm(null);
       await loadAll();
     } catch (err) {
@@ -143,6 +164,7 @@ export default function AdminDashboard() {
 
   const removeSession = async (id) => {
     if (!window.confirm("متأكد تحذف السيشن؟")) return;
+
     try {
       await deleteSession(id);
       await loadAll();
@@ -158,6 +180,7 @@ export default function AdminDashboard() {
     <div className="admin-page">
       <h1>Admin Dashboard</h1>
 
+      {/* Profile */}
       <section className="admin-profile">
         <div className="card">
           <h3>Profile</h3>
@@ -167,6 +190,7 @@ export default function AdminDashboard() {
         </div>
       </section>
 
+      {/* Summary */}
       <section className="admin-summary">
         <div className="summary-grid">
           <div className="stat card">Enrolled Courses: <b>{summary?.totalCourses ?? 0}</b></div>
@@ -176,6 +200,7 @@ export default function AdminDashboard() {
         </div>
       </section>
 
+      {/* Courses */}
       <section className="admin-courses">
         <div className="section-header">
           <h2>Courses</h2>
@@ -189,7 +214,11 @@ export default function AdminDashboard() {
           {courses.map((c) => (
             <div className="card list-item" key={c.id}>
               <div className="left">
-                <img src={c.imageUrl ? `http://localhost:5083${c.imageUrl}` : "/placeholder.png"} alt="" className="thumb"/>
+                <img
+                  src={c.imageUrl ? `${API}${c.imageUrl}` : "/placeholder.png"}
+                  alt=""
+                  className="thumb"
+                />
                 <div>
                   <h3>{c.title}</h3>
                   <p className="muted">{c.description}</p>
@@ -200,8 +229,9 @@ export default function AdminDashboard() {
               <div className="actions">
                 <button className="btn" onClick={() => openEditCourse(c)}>Edit</button>
                 <button className="btn danger" onClick={() => removeCourse(c.id)}>Delete</button>
+
                 <div className="upload-row">
-                  <input type="file" onChange={(e)=>setImageFile(e.target.files[0])} />
+                  <input type="file" onChange={(e) => setImageFile(e.target.files[0])} />
                   <button className="btn" onClick={() => uploadImage(c.id)}>Upload Image</button>
                 </div>
               </div>
@@ -210,6 +240,7 @@ export default function AdminDashboard() {
         </div>
       </section>
 
+      {/* Sessions */}
       <section className="admin-sessions">
         <div className="section-header">
           <h2>Sessions</h2>
@@ -237,40 +268,6 @@ export default function AdminDashboard() {
           ))}
         </div>
       </section>
-
-      {/* Course Form Modal (simple inline) */}
-      {courseForm && (
-        <div className="modal">
-          <div className="modal-card">
-            <h3>{courseForm.id ? "Edit Course" : "Add Course"}</h3>
-            <input placeholder="Title" value={courseForm.title} onChange={(e)=>setCourseForm({...courseForm, title:e.target.value})}/>
-            <textarea placeholder="Description" value={courseForm.description} onChange={(e)=>setCourseForm({...courseForm, description:e.target.value})}/>
-            <input placeholder="Price" type="number" value={courseForm.price} onChange={(e)=>setCourseForm({...courseForm, price:e.target.value})}/>
-            <input placeholder="CategoryId" type="number" value={courseForm.categoryId} onChange={(e)=>setCourseForm({...courseForm, categoryId:e.target.value})}/>
-            <div className="modal-actions">
-              <button className="btn" onClick={saveCourse}>Save</button>
-              <button className="btn" onClick={()=>setCourseForm(null)}>Cancel</button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Session Form Modal */}
-      {sessionForm && (
-        <div className="modal">
-          <div className="modal-card">
-            <h3>{sessionForm.id ? "Edit Session" : "Add Session"}</h3>
-            <input placeholder="Title" value={sessionForm.title} onChange={(e)=>setSessionForm({...sessionForm, title:e.target.value})}/>
-            <input placeholder="Video URL" value={sessionForm.videoUrl} onChange={(e)=>setSessionForm({...sessionForm, videoUrl:e.target.value})}/>
-            <input placeholder="Price" type="number" value={sessionForm.price} onChange={(e)=>setSessionForm({...sessionForm, price:e.target.value})}/>
-            <input placeholder="CourseId" type="number" value={sessionForm.courseId} onChange={(e)=>setSessionForm({...sessionForm, courseId:e.target.value})}/>
-            <div className="modal-actions">
-              <button className="btn" onClick={saveSession}>Save</button>
-              <button className="btn" onClick={()=>setSessionForm(null)}>Cancel</button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

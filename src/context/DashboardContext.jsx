@@ -13,39 +13,40 @@ export function DashboardProvider({ children }) {
     payments: [],
   });
 
-useEffect(() => {
-  if (!token) return;
+  const API = import.meta.env.VITE_API_URL;
 
-  async function loadData() {
-    try {
-      // 1) Load profile
-      const p = await fetch("http://localhost:5083/api/Auth/profile", {
-        headers: { Authorization: `Bearer ${token}` },
-      }).then((res) => res.json());
+  useEffect(() => {
+    if (!token) return;
 
-      setProfile(p);
+    async function loadData() {
+      try {
+        // Load profile
+        const p = await fetch(`${API}/Auth/profile`, {
+          headers: { Authorization: `Bearer ${token}` },
+        }).then((res) => res.json());
 
-      // 2) Load dashboard based on role
-      const endpoint =
-        p.role === "admin"
-          ? "http://localhost:5083/api/Dashboard/admin"
-          : "http://localhost:5083/api/Dashboard/student";
+        setProfile(p);
 
-      const d = await fetch(endpoint, {
-        headers: { Authorization: `Bearer ${token}` },
-      }).then((res) => res.json());
+        // Load dashboard
+        const endpoint =
+          p.role === "admin"
+            ? `${API}/Dashboard/admin`
+            : `${API}/Dashboard/student`;
 
-      setDashboard(d);
-    } catch (err) {
-      console.error("Dashboard Error:", err);
-    } finally {
-      setLoading(false);
+        const d = await fetch(endpoint, {
+          headers: { Authorization: `Bearer ${token}` },
+        }).then((res) => res.json());
+
+        setDashboard(d);
+      } catch (err) {
+        console.error("Dashboard Error:", err);
+      } finally {
+        setLoading(false);
+      }
     }
-  }
 
-  loadData();
-}, [token]);
-
+    loadData();
+  }, [token]);
 
   return (
     <DashboardContext.Provider value={{ loading, profile, dashboard }}>

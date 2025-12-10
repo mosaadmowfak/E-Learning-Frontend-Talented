@@ -154,9 +154,10 @@
 }
 
 /* === FOOTER === */
+/* === FOOTER === */
 .footer {
   background: #1c1d1f;
-  padding: 40px 0;
+  padding: 50px 0;
   text-align: center;
   color: white;
   margin-top: 80px;
@@ -165,31 +166,49 @@
 .footer-content {
   max-width: 700px;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* يفصل كل قسم عن اللي بعده */
 }
 
 .footer-brand {
-  font-size: 28px;
-  font-weight: 800;
+  font-size: 32px;
+  font-weight: 900;
   color: var(--primary);
 }
 
-.social-links {
-  margin-top: 12px;
+/* Social */
+.social-links,
+.footer-section {
   display: flex;
   justify-content: center;
   gap: 25px;
 }
 
-.social-links a {
-  color: var(--primary);
+/* Links Styling */
+.social-links a,
+.footer-section a {
+  color: #bbb;
+  font-size: 15px;
+  text-decoration: none;
   font-weight: 600;
 }
 
+.social-links a:hover,
+.footer-section a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* Copy text */
 .footer-copy {
-  margin-top: 15px;
+  margin-top: 20px;
   font-size: 13px;
   color: #bbb;
 }
+
+
+
 
 /* RESPONSIVE */
 @media (max-width: 900px) {

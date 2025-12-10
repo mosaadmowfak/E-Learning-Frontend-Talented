@@ -9,6 +9,9 @@ export default function Home() {
 
   const categoriesRef = useRef(null);
 
+  // 🔥 API الصحيح للصور
+  const API = import.meta.env.VITE_API_URL.replace("/api", "");
+
   useEffect(() => {
     const load = async () => {
       const res1 = await api.get("/Courses");
@@ -25,7 +28,6 @@ export default function Home() {
 
   return (
     <div className="home-page">
-
       {/* HERO */}
       <div className="hero">
         <div className="hero-box">
@@ -48,12 +50,19 @@ export default function Home() {
       <h2 className="section-title courses-title">Courses</h2>
 
       <div className="courses-grid">
-        {courses.map(c => (
+        {courses.map((c) => (
           <div className="course-card" key={c.id}>
-            <img src={`http://localhost:5083${c.imageUrl}`} alt="" />
+            <img
+              src={c.imageUrl ? `${API}${c.imageUrl}` : "/placeholder.png"}
+              alt={c.title}
+            />
+
             <h3>{c.title}</h3>
             <p className="price">{c.price} EGP</p>
-            <Link className="details-btn" to={`/course/${c.id}`}>Details</Link>
+
+            <Link className="details-btn" to={`/course/${c.id}`}>
+              Details
+            </Link>
           </div>
         ))}
       </div>
@@ -62,25 +71,30 @@ export default function Home() {
       <h2 className="section-title categories-title">Categories</h2>
 
       <div className="categories-grid" ref={categoriesRef}>
-        {categories.map(cat => (
+        {categories.map((cat) => (
           <div className="category-card" key={cat.id}>{cat.name}</div>
         ))}
       </div>
 
-      {/* FOOTER */}
       <footer className="footer">
         <div className="footer-content">
           <span className="footer-brand">TALENTED</span>
 
-          <div className="social-links">
+          <div className="footer-section">
             <a href="https://facebook.com" target="_blank">Facebook</a>
             <a href="https://instagram.com" target="_blank">Instagram</a>
           </div>
+
+          <div className="footer-section">
+            <a href="/privacy-policy">سياسة الخصوصية</a>
+            <a href="/refund-policy">سياسة الاسترجاع</a>
+          </div>
         </div>
 
-        <p className="footer-copy">© {new Date().getFullYear()} TALENTED — جميع الحقوق محفوظة</p>
+        <p className="footer-copy">
+          © {new Date().getFullYear()} TALENTED — جميع الحقوق محفوظة
+        </p>
       </footer>
-
     </div>
   );
 }
