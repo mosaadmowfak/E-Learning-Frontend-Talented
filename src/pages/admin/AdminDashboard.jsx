@@ -14,7 +14,7 @@ import {
 } from "../../api/adminServices.js";
 import "./admin.css";
 
-// 🔥 دالة لإصلاح أي Response راجع String بدل JSON
+// 🔥 معالجة رد راجع String بدلاً من JSON
 function fixResponse(data) {
   try {
     return typeof data === "string" ? JSON.parse(data) : data;
@@ -192,139 +192,183 @@ export default function AdminDashboard() {
   if (loading) return <div className="admin-page">Loading...</div>;
 
   return (
-  <>
-    <div className="admin-page">
-      <h1>Admin Dashboard</h1>
+    <>
+      <div className="admin-page">
+        <h1>Admin Dashboard</h1>
 
-      {/* Profile */}
-      <section className="admin-profile">
-        <div className="card">
-          <h3>Profile</h3>
-          <p><b>Name:</b> {profile?.name || "-"}</p>
-          <p><b>Email:</b> {profile?.email || "-"}</p>
-          <p><b>Role:</b> {profile?.role || "-"}</p>
-        </div>
-      </section>
-
-      {/* Summary */}
-      <section className="admin-summary">
-        <div className="summary-grid">
-          <div className="stat card">Enrolled Courses: <b>{summary?.totalCourses ?? 0}</b></div>
-          <div className="stat card">Booked Sessions: <b>{summary?.totalSessions ?? 0}</b></div>
-          <div className="stat card">Total Students: <b>{summary?.totalStudents ?? 0}</b></div>
-          <div className="stat card">Total Sales: <b>{summary?.totalSales ?? 0}</b></div>
-        </div>
-      </section>
-
-      {/* Courses */}
-      <section className="admin-courses">
-        <div className="section-header">
-          <h2>Courses</h2>
-          <div>
-            <button className="btn" onClick={openNewCourse}>Add Course</button>
-            <button className="btn" onClick={loadAll}>Refresh</button>
+        {/* === Profile === */}
+        <section className="admin-profile">
+          <div className="card">
+            <h3>Profile</h3>
+            <p><b>Name:</b> {profile?.name || "-"}</p>
+            <p><b>Email:</b> {profile?.email || "-"}</p>
+            <p><b>Role:</b> {profile?.role || "-"}</p>
           </div>
-        </div>
+        </section>
 
-        <div className="list">
-          {courses.map((c) => (
-            <div className="card list-item" key={c.id}>
-              <div className="left">
-                <img
-                  src={c.imageUrl ? `https://talented-academy.space${c.imageUrl}` : "/placeholder.png"}
-                  alt=""
-                  className="thumb"
-                />
-                <div>
-                  <h3>{c.title}</h3>
-                  <p className="muted">{c.description}</p>
-                  <p className="muted">Price: {c.price} EGP</p>
+        {/* === Summary === */}
+        <section className="admin-summary">
+          <div className="summary-grid">
+            <div className="stat card">Enrolled Courses: <b>{summary?.totalCourses ?? 0}</b></div>
+            <div className="stat card">Booked Sessions: <b>{summary?.totalSessions ?? 0}</b></div>
+            <div className="stat card">Total Students: <b>{summary?.totalStudents ?? 0}</b></div>
+            <div className="stat card">Total Sales: <b>{summary?.totalSales ?? 0}</b></div>
+          </div>
+        </section>
+
+        {/* === Courses === */}
+        <section className="admin-courses">
+          <div className="section-header">
+            <h2>Courses</h2>
+            <div>
+              <button className="btn" onClick={openNewCourse}>Add Course</button>
+              <button className="btn" onClick={loadAll}>Refresh</button>
+            </div>
+          </div>
+
+          <div className="list">
+            {courses.map((c) => (
+              <div className="card list-item" key={c.id}>
+                <div className="left">
+                  <img
+                    src={c.imageUrl ? `https://talented-academy.space${c.imageUrl}` : "/placeholder.png"}
+                    alt=""
+                    className="thumb"
+                  />
+                  <div>
+                    <h3>{c.title}</h3>
+                    <p className="muted">{c.description}</p>
+                    <p className="muted">Price: {c.price} EGP</p>
+                  </div>
+                </div>
+
+                <div className="actions">
+                  <button className="btn" onClick={() => openEditCourse(c)}>Edit</button>
+                  <button className="btn danger" onClick={() => removeCourse(c.id)}>Delete</button>
+
+                  <div className="upload-row">
+                    <input type="file" onChange={(e) => setImageFile(e.target.files[0])} />
+                    <button className="btn" onClick={() => uploadImage(c.id)}>Upload Image</button>
+                  </div>
                 </div>
               </div>
+            ))}
+          </div>
+        </section>
 
-              <div className="actions">
-                <button className="btn" onClick={() => openEditCourse(c)}>Edit</button>
-                <button className="btn danger" onClick={() => removeCourse(c.id)}>Delete</button>
+        {/* === Sessions === */}
+        <section className="admin-sessions">
+          <div className="section-header">
+            <h2>Sessions</h2>
+            <div>
+              <button className="btn" onClick={openNewSession}>Add Session</button>
+            </div>
+          </div>
 
-                <div className="upload-row">
-                  <input type="file" onChange={(e) => setImageFile(e.target.files[0])} />
-                  <button className="btn" onClick={() => uploadImage(c.id)}>Upload Image</button>
+          <div className="list">
+            {sessions.map((s) => (
+              <div className="card list-item" key={s.id}>
+                <div className="left">
+                  <h3>{s.title}</h3>
+                  <p className="muted">Course: {s.courseTitle}</p>
+                  <p className="muted">Price: {s.price} EGP</p>
+                </div>
+
+                <div className="actions">
+                  <button className="btn" onClick={() => openEditSession(s)}>Edit</button>
+                  <button className="btn danger" onClick={() => removeSession(s.id)}>Delete</button>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Sessions */}
-      <section className="admin-sessions">
-        <div className="section-header">
-          <h2>Sessions</h2>
-          <div>
-            <button className="btn" onClick={openNewSession}>Add Session</button>
+            ))}
           </div>
-        </div>
-
-        <div className="list">
-          {sessions.map((s) => (
-            <div className="card list-item" key={s.id}>
-              <div className="left">
-                <h3>{s.title}</h3>
-                <p className="muted">Course: {s.courseTitle}</p>
-                <p className="muted">Price: {s.price} EGP</p>
-              </div>
-
-              <div className="actions">
-                <button className="btn" onClick={() => openEditSession(s)}>Edit</button>
-                <button className="btn danger" onClick={() => removeSession(s.id)}>Delete</button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
-
-    {/* ===== Modal هنا مكانه الصحيح ===== */}
-    {courseForm && (
-      <div className="modal">
-        <div className="modal-card">
-          <h3>{courseForm.id ? "Edit Course" : "Add Course"}</h3>
-
-          <input
-            type="text"
-            placeholder="Title"
-            value={courseForm.title}
-            onChange={(e) => setCourseForm({ ...courseForm, title: e.target.value })}
-          />
-
-          <textarea
-            placeholder="Description"
-            value={courseForm.description}
-            onChange={(e) => setCourseForm({ ...courseForm, description: e.target.value })}
-          />
-
-          <input
-            type="number"
-            placeholder="Price"
-            value={courseForm.price}
-            onChange={(e) => setCourseForm({ ...courseForm, price: e.target.value })}
-          />
-
-          <input
-            type="number"
-            placeholder="Category ID"
-            value={courseForm.categoryId}
-            onChange={(e) => setCourseForm({ ...courseForm, categoryId: e.target.value })}
-          />
-
-          <div className="modal-actions">
-            <button className="btn" onClick={saveCourse}>Save</button>
-            <button className="btn danger" onClick={() => setCourseForm(null)}>Cancel</button>
-          </div>
-        </div>
+        </section>
       </div>
-    )}
-  </>
-);
 
+      {/* === COURSE MODAL === */}
+      {courseForm && (
+        <div className="modal">
+          <div className="modal-card">
+            <h3>{courseForm.id ? "Edit Course" : "Add Course"}</h3>
+
+            <input
+              type="text"
+              placeholder="Title"
+              value={courseForm.title}
+              onChange={(e) => setCourseForm({ ...courseForm, title: e.target.value })}
+            />
+
+            <textarea
+              placeholder="Description"
+              value={courseForm.description}
+              onChange={(e) => setCourseForm({ ...courseForm, description: e.target.value })}
+            />
+
+            <input
+              type="number"
+              placeholder="Price"
+              value={courseForm.price}
+              onChange={(e) => setCourseForm({ ...courseForm, price: e.target.value })}
+            />
+
+            <input
+              type="number"
+              placeholder="Category ID"
+              value={courseForm.categoryId}
+              onChange={(e) => setCourseForm({ ...courseForm, categoryId: e.target.value })}
+            />
+
+            <div className="modal-actions">
+              <button className="btn" onClick={saveCourse}>Save</button>
+              <button className="btn danger" onClick={() => setCourseForm(null)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* === SESSION MODAL (🔥 جديد ومظبوط) === */}
+      {sessionForm && (
+        <div className="modal">
+          <div className="modal-card">
+            <h3>{sessionForm.id ? "Edit Session" : "Add Session"}</h3>
+
+            <input
+              type="text"
+              placeholder="Title"
+              value={sessionForm.title}
+              onChange={(e) => setSessionForm({ ...sessionForm, title: e.target.value })}
+            />
+
+            <input
+              type="text"
+              placeholder="Video URL"
+              value={sessionForm.videoUrl}
+              onChange={(e) => setSessionForm({ ...sessionForm, videoUrl: e.target.value })}
+            />
+
+            <input
+              type="number"
+              placeholder="Price"
+              value={sessionForm.price}
+              onChange={(e) => setSessionForm({ ...sessionForm, price: e.target.value })}
+            />
+
+            <select
+              value={sessionForm.courseId}
+              onChange={(e) => setSessionForm({ ...sessionForm, courseId: Number(e.target.value) })}
+            >
+              <option value="0">اختر الكورس</option>
+              {courses.map((c) => (
+                <option key={c.id} value={c.id}>{c.title}</option>
+              ))}
+            </select>
+
+            <div className="modal-actions">
+              <button className="btn" onClick={saveSession}>Save</button>
+              <button className="btn danger" onClick={() => setSessionForm(null)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
 }
