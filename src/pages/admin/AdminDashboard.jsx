@@ -192,11 +192,9 @@ export default function AdminDashboard() {
   if (loading) return <div className="admin-page">Loading...</div>;
 
   return (
+  <>
     <div className="admin-page">
       <h1>Admin Dashboard</h1>
-
-      {/* باقي الواجهة بدون تغيير */}
-      {/* 👆 مش هغير أي UI، بس منطق CRUD اتظبط */}
 
       {/* Profile */}
       <section className="admin-profile">
@@ -271,11 +269,9 @@ export default function AdminDashboard() {
           {sessions.map((s) => (
             <div className="card list-item" key={s.id}>
               <div className="left">
-                <div>
-                  <h3>{s.title}</h3>
-                  <p className="muted">Course: {s.courseTitle}</p>
-                  <p className="muted">Price: {s.price} EGP</p>
-                </div>
+                <h3>{s.title}</h3>
+                <p className="muted">Course: {s.courseTitle}</p>
+                <p className="muted">Price: {s.price} EGP</p>
               </div>
 
               <div className="actions">
@@ -287,5 +283,48 @@ export default function AdminDashboard() {
         </div>
       </section>
     </div>
-  );
+
+    {/* ===== Modal هنا مكانه الصحيح ===== */}
+    {courseForm && (
+      <div className="modal">
+        <div className="modal-card">
+          <h3>{courseForm.id ? "Edit Course" : "Add Course"}</h3>
+
+          <input
+            type="text"
+            placeholder="Title"
+            value={courseForm.title}
+            onChange={(e) => setCourseForm({ ...courseForm, title: e.target.value })}
+          />
+
+          <textarea
+            placeholder="Description"
+            value={courseForm.description}
+            onChange={(e) => setCourseForm({ ...courseForm, description: e.target.value })}
+          />
+
+          <input
+            type="number"
+            placeholder="Price"
+            value={courseForm.price}
+            onChange={(e) => setCourseForm({ ...courseForm, price: e.target.value })}
+          />
+
+          <input
+            type="number"
+            placeholder="Category ID"
+            value={courseForm.categoryId}
+            onChange={(e) => setCourseForm({ ...courseForm, categoryId: e.target.value })}
+          />
+
+          <div className="modal-actions">
+            <button className="btn" onClick={saveCourse}>Save</button>
+            <button className="btn danger" onClick={() => setCourseForm(null)}>Cancel</button>
+          </div>
+        </div>
+      </div>
+    )}
+  </>
+);
+
 }
