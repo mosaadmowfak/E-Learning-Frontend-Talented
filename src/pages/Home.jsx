@@ -9,8 +9,11 @@ export default function Home() {
 
   const categoriesRef = useRef(null);
 
-  // 🔥 API الصحيح للصور
-  const API = import.meta.env.VITE_API_URL.replace("/api", "");
+  // دالة إصلاح رابط الصورة
+  const fixImage = (url) => {
+    if (!url) return "/placeholder.png";
+    return `https://talented-academy.space${url.replace("/uploads", "/Uploads")}`;
+  };
 
   useEffect(() => {
     const load = async () => {
@@ -53,12 +56,10 @@ export default function Home() {
         {courses.map((c) => (
           <div className="course-card" key={c.id}>
             <img
-              src={c.imageUrl ? `https://talented-academy.space${c.imageUrl.replace("/uploads", "/Uploads")}` : "/placeholder.png"}
-
+              src={fixImage(c.imageUrl)}
               alt={c.title}
               className="thumb"
             />
-
 
             <h3>{c.title}</h3>
             <p className="price">{c.price} EGP</p>
