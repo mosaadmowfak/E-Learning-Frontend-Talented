@@ -32,7 +32,7 @@ export default function Courses() {
           <div className="course-card" key={c.id}>
 
             <img
-              src={`${API}${c.imageUrl}`}
+              src={`https://talented-academy.space${c.imageUrl}?v=${Date.now()}`}
               alt={c.title}
               className="course-img"
             />
