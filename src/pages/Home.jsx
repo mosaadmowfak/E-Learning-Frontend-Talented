@@ -9,6 +9,13 @@ export default function Home() {
 
   const categoriesRef = useRef(null);
 
+  // 🔥 دالة إصلاح الصورة نهائيًا
+  const fixImage = (url) => {
+    if (!url) return "/placeholder.png";
+
+    // إصلاح Lowercase → Uppercase
+    return `https://talented-academy.space${url.replace("uploads", "Uploads")}`;
+  };
 
   useEffect(() => {
     const load = async () => {
@@ -26,7 +33,6 @@ export default function Home() {
 
   return (
     <div className="home-page">
-      {/* HERO */}
       <div className="hero">
         <div className="hero-box">
           <h1>Learn skills that can change your life</h1>
@@ -44,19 +50,16 @@ export default function Home() {
         </div>
       </div>
 
-      {/* COURSES */}
       <h2 className="section-title courses-title">Courses</h2>
 
       <div className="courses-grid">
         {courses.map((c) => (
           <div className="course-card" key={c.id}>
             <img
-              src={c.imageUrl ? `https://talented-academy.space${c.imageUrl}` : "/placeholder.png"}
+              src={fixImage(c.imageUrl)}
               alt={c.title}
               className="thumb"
             />
-
-
             <h3>{c.title}</h3>
             <p className="price">{c.price} EGP</p>
 
@@ -67,7 +70,6 @@ export default function Home() {
         ))}
       </div>
 
-      {/* CATEGORIES */}
       <h2 className="section-title categories-title">Categories</h2>
 
       <div className="categories-grid" ref={categoriesRef}>
@@ -75,26 +77,6 @@ export default function Home() {
           <div className="category-card" key={cat.id}>{cat.name}</div>
         ))}
       </div>
-
-      <footer className="footer">
-        <div className="footer-content">
-          <span className="footer-brand">TALENTED</span>
-
-          <div className="footer-section">
-            <a href="https://facebook.com" target="_blank">Facebook</a>
-            <a href="https://instagram.com" target="_blank">Instagram</a>
-          </div>
-
-          <div className="footer-section">
-            <a href="/privacy-policy">سياسة الخصوصية</a>
-            <a href="/refund-policy">سياسة الاسترجاع</a>
-          </div>
-        </div>
-
-        <p className="footer-copy">
-          © {new Date().getFullYear()} TALENTED — جميع الحقوق محفوظة
-        </p>
-      </footer>
     </div>
   );
 }
