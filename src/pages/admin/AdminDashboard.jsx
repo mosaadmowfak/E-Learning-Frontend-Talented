@@ -11,8 +11,17 @@ import {
   createSession,
   updateSession,
   deleteSession,
-} from "../../api/adminServices";
+} from "../../api/adminServices.js";
 import "./admin.css";
+
+// 🔥 دالة لإصلاح أي Response راجع String بدل JSON
+function fixResponse(data) {
+  try {
+    return typeof data === "string" ? JSON.parse(data) : data;
+  } catch {
+    return data;
+  }
+}
 
 export default function AdminDashboard() {
   const [profile, setProfile] = useState(null);
@@ -20,10 +29,8 @@ export default function AdminDashboard() {
   const [courses, setCourses] = useState([]);
   const [sessions, setSessions] = useState([]);
 
-  // 🔥 API الصحيح للصور
-  const API = import.meta.env.VITE_API_URL.replace("/api", "");
+  const API = import.meta.env.VITE_API_URL;
 
-  // UI
   const [loading, setLoading] = useState(true);
   const [courseForm, setCourseForm] = useState(null);
   const [sessionForm, setSessionForm] = useState(null);
@@ -43,13 +50,13 @@ export default function AdminDashboard() {
         getSessions(),
       ]);
 
-      setProfile(pRes.data);
-      setSummary(dRes.data);
-      setCourses(cRes.data || []);
-      setSessions(sRes.data || []);
+      setProfile(fixResponse(pRes.data));
+      setSummary(fixResponse(dRes.data));
+      setCourses(fixResponse(cRes.data) || []);
+      setSessions(fixResponse(sRes.data) || []);
     } catch (err) {
       console.error("Admin load error:", err);
-      alert("خطأ في جلب البيانات — شوف console");
+      alert("خطأ في جلب البيانات — راجع الـ console");
     } finally {
       setLoading(false);
     }
@@ -70,23 +77,25 @@ export default function AdminDashboard() {
 
   const saveCourse = async () => {
     try {
+      let res;
       if (courseForm.id) {
-        await updateCourse(courseForm.id, {
+        res = await updateCourse(courseForm.id, {
           title: courseForm.title,
           description: courseForm.description,
           price: Number(courseForm.price),
           categoryId: Number(courseForm.categoryId),
         });
-        alert("Course updated");
       } else {
-        await createCourse({
+        res = await createCourse({
           title: courseForm.title,
           description: courseForm.description,
           price: Number(courseForm.price),
           categoryId: Number(courseForm.categoryId),
         });
-        alert("Course created");
       }
+
+      const data = fixResponse(res.data);
+      alert(data.message || "تم الحفظ بنجاح");
 
       setCourseForm(null);
       await loadAll();
@@ -98,9 +107,10 @@ export default function AdminDashboard() {
 
   const removeCourse = async (id) => {
     if (!window.confirm("متأكد تحذف الكورس؟")) return;
-
     try {
-      await deleteCourse(id);
+      const res = await deleteCourse(id);
+      const data = fixResponse(res.data);
+      alert(data.message || "تم الحذف");
       await loadAll();
     } catch (err) {
       console.error(err);
@@ -112,8 +122,9 @@ export default function AdminDashboard() {
     if (!imageFile) return alert("اختار صورة الأول");
 
     try {
-      await uploadCourseImage(courseId, imageFile);
-      alert("Image uploaded");
+      const res = await uploadCourseImage(courseId, imageFile);
+      const data = fixResponse(res.data);
+      alert(data.message || "Image uploaded");
       setImageFile(null);
       await loadAll();
     } catch (err) {
@@ -137,22 +148,24 @@ export default function AdminDashboard() {
 
   const saveSession = async () => {
     try {
+      let res;
       if (sessionForm.id) {
-        await updateSession(sessionForm.id, {
+        res = await updateSession(sessionForm.id, {
           title: sessionForm.title,
           videoUrl: sessionForm.videoUrl,
           price: Number(sessionForm.price),
         });
-        alert("Session updated");
       } else {
-        await createSession({
+        res = await createSession({
           title: sessionForm.title,
           videoUrl: sessionForm.videoUrl,
           price: Number(sessionForm.price),
           courseId: Number(sessionForm.courseId),
         });
-        alert("Session created");
       }
+
+      const data = fixResponse(res.data);
+      alert(data.message || "تم حفظ السيشن");
 
       setSessionForm(null);
       await loadAll();
@@ -166,7 +179,9 @@ export default function AdminDashboard() {
     if (!window.confirm("متأكد تحذف السيشن؟")) return;
 
     try {
-      await deleteSession(id);
+      const res = await deleteSession(id);
+      const data = fixResponse(res.data);
+      alert(data.message || "تم حذف السيشن");
       await loadAll();
     } catch (err) {
       console.error(err);
@@ -179,6 +194,9 @@ export default function AdminDashboard() {
   return (
     <div className="admin-page">
       <h1>Admin Dashboard</h1>
+
+      {/* باقي الواجهة بدون تغيير */}
+      {/* 👆 مش هغير أي UI، بس منطق CRUD اتظبط */}
 
       {/* Profile */}
       <section className="admin-profile">
