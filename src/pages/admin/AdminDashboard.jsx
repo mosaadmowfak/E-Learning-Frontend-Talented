@@ -233,7 +233,7 @@ export default function AdminDashboard() {
             <div className="card list-item" key={c.id}>
               <div className="left">
                 <img
-                  src={c.imageUrl ? `${API}${c.imageUrl}` : "/placeholder.png"}
+                  src={c.imageUrl ? `https://talented-academy.space${c.imageUrl}` : "/placeholder.png"}
                   alt=""
                   className="thumb"
                 />

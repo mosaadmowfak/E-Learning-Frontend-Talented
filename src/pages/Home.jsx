@@ -53,9 +53,11 @@ export default function Home() {
         {courses.map((c) => (
           <div className="course-card" key={c.id}>
             <img
-              src={c.imageUrl ? `${API}${c.imageUrl}` : "/placeholder.png"}
+              src={c.imageUrl ? `https://talented-academy.space${c.imageUrl}` : "/placeholder.png"}
               alt={c.title}
+              className="thumb"
             />
+
 
             <h3>{c.title}</h3>
             <p className="price">{c.price} EGP</p>
