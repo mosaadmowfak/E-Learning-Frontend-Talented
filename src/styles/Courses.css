@@ -75,7 +75,7 @@
   margin-top: auto;
   padding: 10px 16px;
   background: var(--primary);
-  color: var(--bg-dark);
+  color: black; /* FIXED */
   border: none;
   border-radius: 6px;
   font-weight: 600;
@@ -87,6 +87,7 @@
 .open-btn:hover {
   background: var(--primary-light);
 }
+
 
 /* === EMPTY RESULT === */
 .no-results {

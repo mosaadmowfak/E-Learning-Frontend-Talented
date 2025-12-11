@@ -55,7 +55,7 @@
 
 .category-chip {
   background: var(--primary);
-  color: var(--bg-dark);
+  color: black; /* FIXED */
 }
 
 .course-desc {
@@ -76,7 +76,7 @@
   margin-top: 10px;
   padding: 10px 20px;
   background: var(--primary);
-  color: var(--bg-dark);
+  color: black; /* FIXED */
   border: none;
   border-radius: 8px;
   font-weight: 700;
@@ -146,7 +146,7 @@
 /* WATCH */
 .watch-btn {
   background: var(--success);
-  color: var(--bg-dark);
+  color: black; /* FIXED */
 }
 
 .watch-btn:hover {
@@ -156,7 +156,7 @@
 /* BUY */
 .buy-btn {
   background: var(--primary);
-  color: var(--bg-dark);
+  color: black; /* FIXED */
 }
 
 .buy-btn:hover {
