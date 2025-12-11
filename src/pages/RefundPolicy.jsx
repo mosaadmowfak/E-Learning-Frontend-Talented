@@ -18,7 +18,11 @@ export default function RefundPolicy() {
       </ul>
 
       <h3>4. تواصل معنا</h3>
-      <p>talentedplatform@gmail.com</p>
+      <p>
+        البريد الإلكتروني: <a href="mailto:talented-learning@outlook.com">talented-learning@outlook.com</a><br/>
+        الهاتف: 01011049620 <br/>
+        العنوان: اكتوبر – الجيزة – مصر
+      </p>
     </div>
   );
 }
