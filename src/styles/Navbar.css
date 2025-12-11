@@ -95,8 +95,9 @@
   display: none;
 }
 
-/* ====== MOBILE MODE ====== */
+/* ===== MOBILE MODE ===== */
 @media (max-width: 850px) {
+
   .nav-search { display: none; }
   .nav-links { display: none; }
 
@@ -141,16 +142,22 @@
     color: var(--text-main);
   }
 
-  /* 🔥 FIX LOGOUT IN MOBILE */
+  /* 🔥 FIXED LOGOUT BUTTON IN MOBILE */
   .logout-mobile {
-  background: var(--primary);
-  color: #000;
-  padding: 10px 14px;
-  border-radius: 6px;
-  border: none;
-  margin-top: 10px;
-  width: fit-content;    /* 👈 أهم نقطة */
-  font-weight: 700;
-  text-align: center;
-}
+    background: var(--primary);
+    color: #000;
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: none;
+    margin-top: 10px;
+    width: 100%;           /* 👈 أهم حاجة */
+    display: block;        /* 👈 يخليه عنصر كامل */
+    font-weight: 700;
+    text-align: center;    /* يخلي النص في النص */
+    cursor: pointer;
+  }
+
+  .logout-mobile:hover {
+    background: var(--primary-light);
+  }
 }
