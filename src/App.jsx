@@ -12,6 +12,8 @@ import PaymentFailed from "./pages/PaymentFailed"
 import PaymentPage from "./pages/Payment";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
+import About from "./pages/About";
+import Shipping from "./pages/Shipping";
 
 // Dashboard imports
 import UserDashboardLayout from "./pages/UserDashboardLayout";
@@ -38,6 +40,8 @@ export default function App() {
         <Route path="/payment-failed" element={<PaymentFailed />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/refund-policy" element={<RefundPolicy />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/shipping" element={<Shipping />} />
 
 
 
