@@ -1,11 +1,11 @@
 /* NAVBAR MAIN */
 .navbar {
-  background: #ffffff;
+  background: var(--bg-alt);
   padding: 14px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-mid);
   position: sticky;
   top: 0;
   width: 100%;
@@ -15,7 +15,7 @@
 /* LOGO */
 .logo-text {
   font-weight: 700;
-  color: #6c5ce7;
+  color: var(--primary);
   font-size: 20px;
 }
 
@@ -30,9 +30,14 @@
   width: 100%;
   padding: 10px 16px;
   border-radius: 40px;
-  border: 1px solid #ccc;
-  background: #fafafa;
+  border: 1px solid var(--border-mid);
+  background: var(--bg-light);
   font-size: 15px;
+  color: var(--text-main);
+}
+
+.nav-search input::placeholder {
+  color: var(--text-light);
 }
 
 /* DESKTOP LINKS */
@@ -43,15 +48,21 @@
 }
 
 .nav-links a {
-  color: #000;
+  color: var(--text-main);
 }
 
+/* BUTTON */
 .btn-purple {
-  background: #6c5ce7;
-  color: white;
+  background: var(--primary);
+  color: var(--bg-dark);
   padding: 8px 16px;
   border-radius: 6px;
   border: none;
+  transition: 0.2s;
+}
+
+.btn-purple:hover {
+  background: var(--primary-light);
 }
 
 /* MOBILE BUTTON (HIDDEN ON DESKTOP) */
@@ -60,6 +71,7 @@
   font-size: 28px;
   background: none;
   border: none;
+  color: var(--text-main);
 }
 
 /* MOBILE MENU */
@@ -86,9 +98,9 @@
     right: -320px;
     width: 260px;
     height: 100vh;
-    background: #fff;
+    background: var(--bg-alt);
     padding: 25px;
-    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.15);
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.4);
     transition: 0.3s ease;
     z-index: 2000;
   }
@@ -103,20 +115,21 @@
     border: none;
     font-size: 26px;
     cursor: pointer;
+    color: var(--text-main);
   }
 
   .mobile-menu a,
   .mobile-menu button {
     font-size: 18px;
     text-align: left;
-    color: #000;
+    color: var(--text-main);
   }
 
   .logout-mobile {
-    background: #6c5ce7;
+    background: var(--primary);
     padding: 10px;
     border-radius: 6px;
-    color: white;
+    color: var(--bg-dark);
     border: none;
     margin-top: 10px;
   }

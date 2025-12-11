@@ -1,25 +1,25 @@
 .policy-container {
   max-width: 900px;
   margin: 40px auto;
-  background: #ffffff;
+  background: var(--bg-alt);
   padding: 30px;
   border-radius: 12px;
-  color: #333;
+  color: var(--text-main);
   line-height: 1.9;
   font-size: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
 
 .policy-container h1 {
   font-size: 28px;
   margin-bottom: 20px;
-  color: #222;
+  color: var(--primary);
 }
 
 .policy-container h3 {
   margin-top: 25px;
   font-size: 20px;
-  color: #444;
+  color: var(--text-light);
 }
 
 .policy-container ul {
@@ -33,4 +33,5 @@
 
 .policy-container p {
   margin-top: 12px;
+  color: var(--text-main);
 }

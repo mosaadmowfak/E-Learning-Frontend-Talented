@@ -1,13 +1,14 @@
 /* === PAGE WRAPPER === */
 .courses-wrapper {
   padding: 40px 8%;
-  background: #fff;
+  background: var(--bg-main);
   min-height: 100vh;
+  color: var(--text-main);
 }
 
 /* === PAGE TITLE === */
 .courses-title {
-  color: #6c5ce7;
+  color: var(--primary);
   margin-bottom: 28px;
   font-size: 32px;
   font-weight: 800;
@@ -22,20 +23,20 @@
 
 /* === CARD === */
 .course-card {
-  background: #ffffff;
+  background: var(--bg-alt);
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid #e5e5e5;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  border: 1px solid var(--border-mid);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;   /* ← أهم حاجة */
+  justify-content: space-between;
   transition: 0.25s ease;
 }
 
 .course-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.35);
 }
 
 /* === IMAGE === */
@@ -57,7 +58,7 @@
 .course-name {
   font-size: 18px;
   font-weight: 700;
-  color: #111;
+  color: var(--text-main);
   margin: 0;
 }
 
@@ -65,7 +66,7 @@
 .course-price {
   font-size: 15px;
   font-weight: 600;
-  color: #6c5ce7;
+  color: var(--primary);
   margin: 0 0 12px 0;
 }
 
@@ -73,8 +74,8 @@
 .open-btn {
   margin-top: auto;
   padding: 10px 16px;
-  background: #111;
-  color: #fff;
+  background: var(--primary);
+  color: var(--bg-dark);
   border: none;
   border-radius: 6px;
   font-weight: 600;
@@ -84,14 +85,14 @@
 }
 
 .open-btn:hover {
-  background: #333;
+  background: var(--primary-light);
 }
 
 /* === EMPTY RESULT === */
 .no-results {
   margin-top: 40px;
   font-size: 18px;
-  color: #666;
+  color: var(--text-light);
   text-align: center;
 }
 

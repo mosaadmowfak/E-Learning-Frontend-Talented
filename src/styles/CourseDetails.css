@@ -1,7 +1,7 @@
 .course-details-page {
   padding-bottom: 60px;
-  color: #111;
-  background: #fff;
+  color: var(--text-main);
+  background: var(--bg-main);
 }
 
 /* TOP AREA */
@@ -11,18 +11,18 @@
   gap: 28px;
   align-items: start;
   padding: 28px 60px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-light);
 }
 
 /* COVER */
 .course-cover {
-  background: #fafafa;
+  background: var(--bg-light);
   padding: 12px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 
 .course-cover img {
@@ -55,13 +55,13 @@
 
 .category-chip {
   background: var(--primary);
-  color: #fff;
+  color: var(--bg-dark);
 }
 
 .course-desc {
   font-size: 16px;
   line-height: 1.6;
-  color: #333;
+  color: var(--text-light);
   margin-bottom: 18px;
 }
 
@@ -76,7 +76,7 @@
   margin-top: 10px;
   padding: 10px 20px;
   background: var(--primary);
-  color: white;
+  color: var(--bg-dark);
   border: none;
   border-radius: 8px;
   font-weight: 700;
@@ -88,6 +88,7 @@
   padding: 30px 60px 10px;
   font-size: 24px;
   font-weight: 800;
+  color: var(--text-main);
 }
 
 .sessions-list {
@@ -101,14 +102,14 @@
   align-items: center;
   padding: 16px 20px;
   border-radius: 10px;
-  background: #ffffff;
+  background: var(--bg-alt);
   margin-bottom: 14px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.25);
 }
 
 .session-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.30);
 }
 
 /* LEFT */
@@ -121,13 +122,15 @@
   margin: 0;
   font-weight: 700;
   font-size: 18px;
+  color: var(--text-main);
 }
 
 .session-price {
   margin-top: 4px;
-  color: #6c5ce7;
+  color: var(--primary);
   font-weight: 600;
 }
+
 /* RIGHT BUTTONS */
 .watch-btn,
 .buy-btn {
@@ -142,21 +145,22 @@
 
 /* WATCH */
 .watch-btn {
-  background: #00b894;
-  color: white;
+  background: var(--success);
+  color: var(--bg-dark);
 }
 
 .watch-btn:hover {
-  background: #009f7d;
+  background: var(--success-hover);
 }
 
 /* BUY */
 .buy-btn {
-  background: #6c5ce7;
-  color: white;
+  background: var(--primary);
+  color: var(--bg-dark);
 }
+
 .buy-btn:hover {
-  background: #5a4bd6;
+  background: var(--primary-light);
 }
 
 /* MOBILE */

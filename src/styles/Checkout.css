@@ -3,25 +3,28 @@
   margin: 50px auto;
   padding: 30px;
   border-radius: 12px;
-  background: white;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  background: var(--bg-alt);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   font-family: Arial, sans-serif;
+  color: var(--text-main);
 }
 
 .checkout-title {
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 10px;
+  color: var(--text-main);
 }
 
 .checkout-price {
   font-size: 18px;
   margin-bottom: 25px;
+  color: var(--text-main);
 }
 
 .checkout-price span {
   font-weight: 700;
-  color: #6c4cf1;
+  color: var(--primary);
 }
 
 .checkout-form {
@@ -32,22 +35,25 @@
 
 .checkout-form label {
   font-weight: 600;
+  color: var(--text-main);
 }
 
 .checkout-form input,
 .checkout-form select {
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-mid);
   border-radius: 8px;
   font-size: 16px;
+  background: var(--bg-light);
+  color: var(--text-main);
 }
 
 .pay-btn {
   margin-top: 20px;
   padding: 14px;
   font-size: 18px;
-  background: #6c4cf1;
-  color: white;
+  background: var(--primary);
+  color: var(--bg-dark);
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -55,5 +61,5 @@
 }
 
 .pay-btn:hover {
-  background: #5537d3;
+  background: var(--primary-light);
 }

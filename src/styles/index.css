@@ -7,11 +7,38 @@
 
 /* GLOBAL THEME */
 :root {
-  --primary: #6c5ce7;
-  --dark: #1c1d1f;
-  --light: #ffffff;
+  /* MAIN BRAND COLORS */
+  --primary: #A1FFFC;
+  --primary-light: #C1FFFF;
+  --primary-dark: #0D1F2E;
+
+  /* BACKGROUNDS */
+  --bg-main: #0D1F2E;
+  --bg-alt: #112635;
+  --bg-light: #183447;
+
+  /* TEXT */
+  --text-main: #A1FFFC;
+  --text-light: #CFFFFF;
+  --text-dark: #0D1F2E;
+
+  /* BORDERS */
+  --border-light: #1A3648;
+  --border-mid: #204058;
+
+  /* BUTTONS */
+  --success: #00b894;
+  --success-hover: #009f7d;
+
+  /* FOOTER */
+  --footer-bg: #0A1722;
+  --footer-text: #A1FFFC;
+  --footer-border: #1A3648;
+
+  /* RADIUS */
   --radius: 8px;
 
+  /* FONTS */
   --font-main: 'Cairo', sans-serif;
   --font-title: 'Cairo', sans-serif;
 }
@@ -19,8 +46,8 @@
 /* BODY */
 body {
   font-family: var(--font-main);
-  background: #fff;
-  color: #000;
+  background: var(--bg-main);
+  color: var(--text-main);
   overflow-x: hidden;
 }
 
