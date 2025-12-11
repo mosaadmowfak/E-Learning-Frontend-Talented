@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import "../styles/Footer.css";
 
+
+
 export default function Footer() {
   return (
     <footer className="footer">
@@ -14,8 +16,8 @@ export default function Footer() {
         <div className="footer-section">
           <h4>Important Links</h4>
           <ul>
-            <li><Link to="/privacy">Privacy Policy</Link></li>
-            <li><Link to="/refund">Refund Policy</Link></li>
+            <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+            <li><Link to="/refund-policy">Refund Policy</Link></li>
           </ul>
         </div>
 
