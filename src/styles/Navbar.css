@@ -67,7 +67,7 @@
   background: var(--primary-light);
 }
 
-/* MOBILE BUTTON */
+/* MOBILE MENU BUTTON */
 .mobile-menu-btn {
   display: none;
   font-size: 28px;
@@ -76,12 +76,10 @@
   color: var(--text-main);
 }
 
-/* REMOVE THIS 👇 — كان سبب المشكلة */
-/*
+/* MOBILE MENU — HIDDEN BY DEFAULT ON DESKTOP */
 .mobile-menu {
   display: none;
 }
-*/
 
 /* ===== MOBILE MODE ===== */
 @media (max-width: 850px) {
@@ -106,7 +104,7 @@
     height: 100vh;
     background: var(--bg-alt);
     padding: 25px;
-    box-shadow: -4px 0 15px rgba(0,0,0,0.4);
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.4);
     transition: 0.35s ease-in-out;
     z-index: 2500;
   }
@@ -132,6 +130,7 @@
     display: block;
   }
 
+  /* MOBILE LOGOUT BUTTON */
   .logout-mobile {
     background: var(--primary);
     color: #000 !important;
