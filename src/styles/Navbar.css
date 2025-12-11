@@ -98,12 +98,13 @@
 /* ===== MOBILE MODE ===== */
 @media (max-width: 850px) {
 
-  .nav-search { display: none; }
-  .nav-links { display: none; }
-
-  .mobile-menu-btn {
+  /* خلي اللينكات حجمها طبيعي مش واخدة مساحة كبيرة */
+  .mobile-menu a {
     display: block;
-    cursor: pointer;
+    width: auto;
+    padding: 4px 0;
+    color: var(--text-main);
+    font-size: 18px;
   }
 
   .mobile-menu {
@@ -152,18 +153,18 @@
   /* 🔥 زرار logout */
   .logout-mobile {
     background: var(--primary);
-    color: #000;
-    padding: 12px 0;
+    color: #000 !important;     /* خلي الكلمة واضحة */
+    padding: 12px;
     border-radius: 6px;
     border: none;
-    margin-top: 15px;
-    width: 100%;
+    margin-top: 10px;
+    width: 100%;               /* ياخد عرض البوكس */
+    text-align: center;
     font-weight: 700;
     font-size: 18px;
-
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
   }
 
   .logout-mobile:hover {

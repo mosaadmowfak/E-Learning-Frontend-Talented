@@ -8,6 +8,19 @@
   position: relative;
 }
 
+@media (max-width: 600px) {
+  .hero {
+    background-image: url("/src/assets/heroMobile.png"); /* صورة الموبايل */
+    background-position: top;
+    background-size: contain !important;
+    background-repeat: no-repeat;
+    background-color: var(--bg-main);
+    height: 350px !important;
+  }
+}
+
+
+
 .hero-box {
   position: absolute;
   bottom: -270px;
