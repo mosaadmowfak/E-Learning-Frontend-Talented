@@ -36,6 +36,12 @@ export default function Footer() {
             >
               Instagram
             </a>
+            <a 
+              href="https://wa.me/201011049620" 
+              target="_blank"
+            >
+              Whatsapp
+            </a>
           </div>
         </div>
 
