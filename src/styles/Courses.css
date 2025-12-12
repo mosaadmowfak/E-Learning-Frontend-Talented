@@ -88,6 +88,19 @@
   background: var(--primary-light);
 }
 
+.category-block {
+  margin-bottom: 45px;
+}
+
+.category-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 18px;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 6px;
+}
+
 
 /* === EMPTY RESULT === */
 .no-results {
