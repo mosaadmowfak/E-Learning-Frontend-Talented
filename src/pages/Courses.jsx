@@ -23,12 +23,20 @@ export default function Courses() {
     api.get("/Courses").then((res) => setCourses(res.data));
   }, []);
 
-  // فلترة حسب البحث
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      setTimeout(() => {
+        const target = document.querySelector(hash);
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 300);
+    }
+  }, [location]);
+
   const filteredCourses = courses.filter(c =>
     c.title.toLowerCase().includes(search)
   );
 
-  // Grouping الكورسات حسب الكاتيجوري
   const grouped = {};
   filteredCourses.forEach(course => {
     const cat = course.categoryName || "Other";
@@ -43,7 +51,7 @@ export default function Courses() {
       {Object.keys(grouped).map((cat) => (
         <div key={cat} className="category-block">
 
-          <h2 className="category-title">{cat}</h2>
+          <h2 id={cat} className="category-title">{cat}</h2>
 
           <div className="courses-grid">
             {grouped[cat].map((c) => (

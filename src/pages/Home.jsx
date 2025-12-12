@@ -32,6 +32,8 @@ export default function Home() {
   return (
     <>
       <div className="home-page">
+
+        {/* HERO */}
         <div className="hero">
           <div className="hero-box">
             <h1>Learn skills that can change your life</h1>
@@ -49,16 +51,13 @@ export default function Home() {
           </div>
         </div>
 
+        {/* COURSES */}
         <h2 className="section-title courses-title">Courses</h2>
 
         <div className="courses-grid">
           {courses.map((c) => (
             <div className="course-card" key={c.id}>
-              <img
-                src={fixImage(c.imageUrl)}
-                alt={c.title}
-                className="thumb"
-              />
+              <img src={fixImage(c.imageUrl)} alt={c.title} className="thumb" />
               <h3>{c.title}</h3>
               <p className="price">{c.price} EGP</p>
 
@@ -69,16 +68,23 @@ export default function Home() {
           ))}
         </div>
 
+        {/* CATEGORIES */}
         <h2 className="section-title categories-title">Categories</h2>
 
         <div className="categories-grid" ref={categoriesRef}>
           {categories.map((cat) => (
-            <div className="category-card" key={cat.id}>{cat.name}</div>
+            <button
+              key={cat.id}
+              className="category-card"
+              onClick={() => (window.location.href = `/courses#${cat.name}`)}
+            >
+              {cat.name}
+            </button>
           ))}
         </div>
+
       </div>
 
-      {/* ⬇️⬇️ FOOTER HERE — SAFE ⬇️⬇️ */}
       <Footer />
     </>
   );
