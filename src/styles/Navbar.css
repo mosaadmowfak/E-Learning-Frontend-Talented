@@ -130,7 +130,27 @@
     display: block;
   }
 
-  /* MOBILE LOGOUT BUTTON */
+  /* === MOBILE SEARCH BAR === */
+  .mobile-search {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .mobile-search input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border-mid);
+    background: var(--bg-light);
+    font-size: 15px;
+    color: var(--text-main);
+  }
+
+  .mobile-search input::placeholder {
+    color: var(--text-light);
+  }
+
   .logout-mobile {
     background: var(--primary);
     color: #000 !important;
@@ -148,3 +168,4 @@
     background: var(--primary-light);
   }
 }
+

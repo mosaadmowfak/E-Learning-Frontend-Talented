@@ -13,15 +13,19 @@ export default function Navbar() {
     e.preventDefault();
     if (!search.trim()) return;
     navigate(`/courses?search=${search}`);
+    setOpen(false); // يقفل القائمة في الموبايل بعد البحث
   };
 
   return (
     <>
       <nav className="navbar">
+
+        {/* LEFT / LOGO */}
         <div className="nav-left">
           <span className="logo-text">TALENTED</span>
         </div>
 
+        {/* DESKTOP SEARCH */}
         <form onSubmit={handleSearch} className="nav-search">
           <input
             value={search}
@@ -30,16 +34,15 @@ export default function Navbar() {
           />
         </form>
 
+        {/* DESKTOP LINKS */}
         <div className="nav-links">
           <Link to="/">Home</Link>
           <Link to="/courses">Courses</Link>
 
-          {/* USER PROFILE */}
           {token && user?.role === "student" && (
             <Link to="/dashboard" className="profile-link">Profile</Link>
           )}
 
-          {/* ADMIN PANEL */}
           {token && user?.role === "admin" && (
             <Link to="/admin" className="profile-link">Admin Panel</Link>
           )}
@@ -54,23 +57,32 @@ export default function Navbar() {
           )}
         </div>
 
+        {/* MOBILE MENU BUTTON */}
         <button className="mobile-menu-btn" onClick={() => setOpen(true)}>
           ☰
         </button>
       </nav>
 
+      {/* ===== MOBILE MENU ===== */}
       <div className={`mobile-menu ${open ? "open" : ""}`}>
         <button className="close-btn" onClick={() => setOpen(false)}>✕</button>
+
+        {/* MOBILE SEARCH */}
+        <form onSubmit={handleSearch} className="mobile-search">
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search for course"
+          />
+        </form>
 
         <Link to="/" onClick={() => setOpen(false)}>Home</Link>
         <Link to="/courses" onClick={() => setOpen(false)}>Courses</Link>
 
-        {/* Mobile student profile */}
         {token && user?.role === "student" && (
           <Link to="/dashboard" onClick={() => setOpen(false)}>Profile</Link>
         )}
 
-        {/* Mobile admin panel */}
         {token && user?.role === "admin" && (
           <Link to="/admin" onClick={() => setOpen(false)}>Admin Panel</Link>
         )}
