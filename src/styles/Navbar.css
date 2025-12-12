@@ -19,6 +19,14 @@
   font-size: 20px;
 }
 
+/* WELCOME TEXT */
+.welcome-text {
+  color: var(--text-main);
+  font-size: 16px;
+  font-weight: 600;
+  margin-right: 12px;
+}
+
 /* SEARCH */
 .nav-search {
   flex: 0.6;
@@ -76,7 +84,7 @@
   color: var(--text-main);
 }
 
-/* MOBILE MENU — HIDDEN BY DEFAULT ON DESKTOP */
+/* MOBILE MENU HIDDEN ON DESKTOP */
 .mobile-menu {
   display: none;
 }
@@ -130,7 +138,7 @@
     display: block;
   }
 
-  /* === MOBILE SEARCH BAR === */
+  /* MOBILE SEARCH */
   .mobile-search {
     width: 100%;
     margin-top: 10px;
@@ -145,10 +153,6 @@
     background: var(--bg-light);
     font-size: 15px;
     color: var(--text-main);
-  }
-
-  .mobile-search input::placeholder {
-    color: var(--text-light);
   }
 
   .logout-mobile {
@@ -168,4 +172,3 @@
     background: var(--primary-light);
   }
 }
-

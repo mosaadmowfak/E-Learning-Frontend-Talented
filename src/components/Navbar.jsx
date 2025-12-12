@@ -13,19 +13,19 @@ export default function Navbar() {
     e.preventDefault();
     if (!search.trim()) return;
     navigate(`/courses?search=${search}`);
-    setOpen(false); // يقفل القائمة في الموبايل بعد البحث
+    setOpen(false);
   };
 
   return (
     <>
       <nav className="navbar">
 
-        {/* LEFT / LOGO */}
+        {/* LOGO */}
         <div className="nav-left">
           <span className="logo-text">TALENTED</span>
         </div>
 
-        {/* DESKTOP SEARCH */}
+        {/* SEARCH DESKTOP */}
         <form onSubmit={handleSearch} className="nav-search">
           <input
             value={search}
@@ -36,15 +36,21 @@ export default function Navbar() {
 
         {/* DESKTOP LINKS */}
         <div className="nav-links">
+
+          {/* WELCOME (Desktop) */}
+          {token && user && (
+            <span className="welcome-text">Welcome, {user.name}</span>
+          )}
+
           <Link to="/">Home</Link>
           <Link to="/courses">Courses</Link>
 
           {token && user?.role === "student" && (
-            <Link to="/dashboard" className="profile-link">Profile</Link>
+            <Link to="/dashboard">Profile</Link>
           )}
 
           {token && user?.role === "admin" && (
-            <Link to="/admin" className="profile-link">Admin Panel</Link>
+            <Link to="/admin">Admin Panel</Link>
           )}
 
           {!token ? (
@@ -57,15 +63,20 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* MOBILE MENU BUTTON */}
+        {/* MOBILE BUTTON */}
         <button className="mobile-menu-btn" onClick={() => setOpen(true)}>
           ☰
         </button>
       </nav>
 
-      {/* ===== MOBILE MENU ===== */}
+      {/* MOBILE MENU */}
       <div className={`mobile-menu ${open ? "open" : ""}`}>
         <button className="close-btn" onClick={() => setOpen(false)}>✕</button>
+
+        {/* WELCOME (Mobile) */}
+        {token && user && (
+          <span className="welcome-text mobile-welcome">Welcome, {user.name}</span>
+        )}
 
         {/* MOBILE SEARCH */}
         <form onSubmit={handleSearch} className="mobile-search">
