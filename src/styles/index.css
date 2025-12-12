@@ -10,37 +10,36 @@
   /* MAIN BRAND COLORS */
   --primary: #A1FFFC;
   --primary-light: #C1FFFF;
-  --primary-dark: #123044; /* أفتح شوية من القديم */
+  --primary-dark: #164765; /* أفتح كمان درجة */
 
-  /* BACKGROUNDS (Opened by ~20%) */
-  --bg-main: #123044;   /* كان #0D1F2E */
-  --bg-alt: #163E54;    /* كان #112635 */
-  --bg-light: #1E5773;  /* كان #183447 */
+  /* BACKGROUNDS (Opened more ~20-25%) */
+  --bg-main: #1A4D6A;   /* كان 123044 — أفتح بشكل واضح */
+  --bg-alt: #1F5B7A;    /* كان 163E54 */
+  --bg-light: #276F92;  /* كان 1E5773 */
 
-  /* TEXT – أفتح وباينة أكتر */
-  --text-main: #C3FFFE;  /* كان #A1FFFC */
-  --text-light: #E4FFFF; /* كان #CFFFFF */
+  /* TEXT */
+  --text-main: #D1FFFF;  /* أفتح */
+  --text-light: #F1FFFF; /* قريب من الأبيض ولكن ناعم */
   --text-dark: #0D1F2E;
 
-  /* BORDERS – تم فتحها بسيط */
-  --border-light: #235570; /* كان #1A3648 */
-  --border-mid: #2C6A87;   /* كان #204058 */
+  /* Borders */
+  --border-light: #2B6F8F;
+  --border-mid:  #3C89A8;
 
   /* BUTTONS */
-  --success: #00c9a2;
-  --success-hover: #00b08c;
+  --success: #00d3ab;
+  --success-hover: #00b893;
 
   /* FOOTER */
-  --footer-bg: #0F2738;     /* أفتح من القديم */
-  --footer-text: #C3FFFE;
-  --footer-border: #235570;
+  --footer-bg: #15435C;  /* أفتح */
+  --footer-text: #D1FFFF;
+  --footer-border: #2B6F8F;
 
   --radius: 8px;
 
   --font-main: 'Cairo', sans-serif;
   --font-title: 'Cairo', sans-serif;
 }
-
 
 /* BODY */
 body {
